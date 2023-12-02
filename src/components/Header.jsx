@@ -8,7 +8,7 @@ const Header = () => {
             Create a <span className="text-blue-400">Resume</span> that{" "}
             <span className="text-blue-400">Gets</span> You Notic<span className="text-blue-400">ed!</span>{" "}
           </h1>
-          <p className="mt-10 text-gray-600 font-smooch text-xl">
+          <p className="mt-10 text-gray-500 font-smooch text-2xl">
             In todays competitive job market, a well-crafted resume is your key
             to unlocking opportunities and showcasing your true potential. Our
             intuitive resume builder empowers you to create a compelling

@@ -1,11 +1,11 @@
-import Editor from "./components/Editor";
+import Body from "./components/Body";
 import Header from "./components/Header";
 
 const App = () => {
   return (
     <div className="">
       <Header></Header>
-      <Editor></Editor>
+      <Body></Body>
     </div>
   );
 };

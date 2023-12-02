@@ -1,6 +1,7 @@
 import { AiOutlineDownload } from "react-icons/ai";
+import EditorTabs from "./EditorTabs";
 
-const Editor = () => {
+const Body = () => {
     const colors = ["#239ce2", "#48bb78", "#0bc5ea", "#a0aec0", "#ed8936"];
   return (
     <div className="my-5 md:my-24">
@@ -17,10 +18,13 @@ const Editor = () => {
           ></p>
         ))}
         </div>
-        <button className="flex justify-center items-center gap-2 text font-agbalumo py-3 px-8 bg-black text-white rounded-md hover:scale-105 duration-300 ease-linear">Download <AiOutlineDownload className="text-xl"></AiOutlineDownload></button>
+        <button className="flex justify-center items-center gap-2 text font-agbalumo py-3 px-8 bg-blue-700 text-white rounded-md hover:scale-105 duration-300 ease-linear hover:bg-blue-400">Download <AiOutlineDownload className="text-xl"></AiOutlineDownload></button>
+      </div>
+      <div className="my-20">
+        <EditorTabs></EditorTabs>
       </div>
     </div>
   );
 };
 
-export default Editor;
+export default Body;
