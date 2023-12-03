@@ -12,7 +12,7 @@ const Resume = ({
   return (
     <div className="text-gray-800 font-sans leading-normal tracking-normal p-10 w-full">
       <div className="container mx-auto md:px-20 px-4 py-12 w-full">
-        <div className="mb-20 md:flex md:justify-between pb-10 border-b-8 border-black">
+        <div className="mb-20 md:flex md:justify-between pb-10 md:border-b-8 md:border-black">
           <div>
             <h1 className="text-8xl  mb-5 font-agbalumo">{basicInfo.name}</h1>
             <h1 className="text-2xl" style={{ color: color }}>
@@ -51,7 +51,7 @@ const Resume = ({
           <p className="text-xl">{summeryData.summery}</p>
         </div>
         <div className="my-28 md:flex md:justify-between md:gap-24">
-          <div className="space-y-20 p-5 border-r-4 border-black pr-32">
+          <div className="space-y-20 p-5 md:border-r-4 md:border-black pr-32">
             <div className="mb-8">
               <h2 className="text-4xl font-bold mb-2" style={{ color: color }}>
                 Education
@@ -99,7 +99,7 @@ const Resume = ({
               </ul>
             </div>
           </div>
-          <div className="p-5 space-y-20 ml-10 w-full">
+          <div className="md:p-5 space-y-20 md:ml-10 w-full">
             <div className="mb-8">
               <h2 className="text-4xl font-bold mb-2" style={{ color: color }}>
                 Projects
