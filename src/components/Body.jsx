@@ -1,10 +1,15 @@
 import { AiOutlineDownload } from "react-icons/ai";
 import EditorTabs from "./EditorTabs";
 import Resume from "./Resume";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { toast } from "react-toastify";
+import generatePDF from "react-to-pdf";
 
 const Body = () => {
-  const colors = ["#239ce2", "#48bb78", "#0bc5ea", "#a0aec0", "#ed8936"];
+  const targetRef = useRef();
+
+  const [color, setColor] = useState("#E73D19");
+  const colors = ["#17ABF5", "#008304", "#044964", "#FC0F00", "#64040D"];
   const [resume, setResume] = useState(false);
   //editor pannels
   const [basicInfo, setBasicInfo] = useState({});
@@ -16,8 +21,17 @@ const Body = () => {
   const [otherData, setOtherData] = useState({});
 
   const handleSubmit = () => {
-    console.log("paisere");
     setResume(true);
+    toast.success(`Resume Created!!!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   const getBasicData = (e) => {
@@ -43,6 +57,16 @@ const Body = () => {
     };
 
     setBasicInfo(data);
+    toast.success(`${data.fieldTitle} added successfully`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
     // console.log(data);
   };
   const getWorkData = (e) => {
@@ -65,6 +89,16 @@ const Body = () => {
       workDetails,
     };
     setWorkData(data);
+    toast.success(`${data.fieldTitle} added successfully`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
   const getProjectData = (e) => {
     e.preventDefault();
@@ -85,6 +119,16 @@ const Body = () => {
     };
 
     setProjectData(data);
+    toast.success(`${data.fieldTitle} added successfully`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
   const getEducationData = (e) => {
     e.preventDefault();
@@ -103,6 +147,16 @@ const Body = () => {
     };
 
     setEducationData(data);
+    toast.success(`${data.fieldTitle} added successfully`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
   const getAchievementData = (e) => {
     e.preventDefault();
@@ -117,6 +171,16 @@ const Body = () => {
       ach3,
     };
     setAchievementData(data);
+    toast.success(`${data.fieldTitle} added successfully`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
   const getSummeryData = (e) => {
     e.preventDefault();
@@ -127,6 +191,16 @@ const Body = () => {
       summery,
     };
     setSummeryData(data);
+    toast.success(`${data.fieldTitle} added successfully`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
   const getOtherData = (e) => {
     e.preventDefault();
@@ -136,23 +210,33 @@ const Body = () => {
       other,
     };
     setOtherData(data);
+    toast.success(`${data.fieldTitle} added successfully`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
-  console.log(
-    "from basic data:",
-    basicInfo,
-    "from work data: ",
-    workData,
-    "Projects data:",
-    projectData,
-    "education data:",
-    educationData,
-    "Achievement Data : ",
-    achievementData,
-    "Summery Data :",
-    summeryData,
-    "Other Data : ",
-    otherData
-  );
+  // console.log(
+  //   "from basic data:",
+  //   basicInfo,
+  //   "from work data: ",
+  //   workData,
+  //   "Projects data:",
+  //   projectData,
+  //   "education data:",
+  //   educationData,
+  //   "Achievement Data : ",
+  //   achievementData,
+  //   "Summery Data :",
+  //   summeryData,
+  //   "Other Data : ",
+  //   otherData
+  // );
   return (
     <div className="my-5 md:my-24">
       <h1 className="text-center bg- font-smooch text-3xl md:text-6xl underline text-gray-700">
@@ -164,11 +248,15 @@ const Body = () => {
             <p
               key={color}
               style={{ backgroundColor: color }}
-              className="h-14 w-14 rounded-full bg-red-700"
+              onClick={() => setColor(color)}
+              className="h-14 w-14 rounded-full bg-red-700 hover:scale-105 duration-100 ease-out"
             ></p>
           ))}
         </div>
-        <button className="flex justify-center items-center gap-2 text font-agbalumo py-3 px-8 bg-blue-700 text-white rounded-md hover:scale-105 duration-300 ease-linear hover:bg-blue-400">
+        <button
+          onClick={() => generatePDF(targetRef, { filename: "resume.pdf" })}
+          className="flex justify-center items-center gap-2 text font-agbalumo py-3 px-8 bg-blue-700 text-white rounded-md hover:scale-105 duration-300 ease-linear hover:bg-blue-400"
+        >
           Download <AiOutlineDownload className="text-xl"></AiOutlineDownload>
         </button>
       </div>
@@ -185,15 +273,16 @@ const Body = () => {
         ></EditorTabs>
       </div>
       {resume ? (
-        <div className="my-20">
+        <div className="my-20" ref={targetRef}>
           <Resume
             basicInfo={basicInfo}
             workData={workData}
             projectData={projectData}
             educationData={educationData}
             achievementData={achievementData}
-            summeryData={setOtherData}
+            summeryData={summeryData}
             otherData={otherData}
+            color={color}
           ></Resume>
         </div>
       ) : (
