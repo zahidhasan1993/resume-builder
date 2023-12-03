@@ -1,85 +1,16 @@
-import { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-const EditorTabs = () => {
-  const [basicInfo, setBasicInfo] = useState({});
-  const [workData, setWorkData] = useState({});
-  const [projectData, setProjectData] = useState({});
-  const getBasicData = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const title = form.title.value;
-    const phone = form.phone.value;
-    const portfolio = form.portfolio.value;
-    const github = form.github.value;
-    const linkedin = form.linkedin.value;
-    const email = form.email.value;
-
-    const data = {
-      fieldTitle: "Basic Info",
-      name,
-      title,
-      phone,
-      portfolio,
-      github,
-      linkedin,
-      email,
-    };
-
-    setBasicInfo(data);
-    // console.log(data);
-  };
-  const getWorkData = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const workTitle = form.worktitle.value;
-    const companyName = form.companyname.value;
-    const certificate = form.certificate.value;
-    const startDate = form.startdate.value;
-    const endDate = form.enddate.value;
-    const workDetails = form.workd.value;
-
-    const data = {
-      fieldTitle: "Work Experience",
-      workTitle,
-      companyName,
-      certificate,
-      startDate,
-      endDate,
-      workDetails,
-    };
-    setWorkData(data);
-  };
-  const getProjectData = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const projectTitle = form.protitle.value;
-    const mainTech = form.maintech.value;
-    const githubURL = form.github.value;
-    const liveLink = form.livelink.value;
-    const projectDescription = form.projectd.value;
-
-    const data = {
-      fieldTitle: "Projects",
-      projectTitle,
-      mainTech,
-      githubURL,
-      liveLink,
-      projectDescription,
-    };
-
-    setProjectData(data);
-  };
-  console.log(
-    "from basic data:",
-    basicInfo,
-    "from work data: ",
-    workData,
-    "Projects data:",
-    projectData
-  );
+const EditorTabs = ({
+  getAchievementData,
+  getBasicData,
+  getEducationData,
+  getOtherData,
+  getProjectData,
+  getSummeryData,
+  getWorkData,
+  handleSubmit,
+}) => {
   return (
     <div className="">
       <Tabs>
@@ -92,7 +23,7 @@ const EditorTabs = () => {
           <Tab>Summary</Tab>
           <Tab>Others</Tab>
         </TabList>
-        <div className="mt-20">
+        <div className="mt-20 p-5 md:p-20">
           {/* tab panel for basic info*/}
           <TabPanel className="md:mx-44">
             <div className="border rounded-lg shadow-2xl p-10">
@@ -221,15 +152,15 @@ const EditorTabs = () => {
             </div>
           </TabPanel>
           {/* tab panel for work experience */}
-          <TabPanel>
-            <div className="border rounded-lg shadow-2xl p-10">
+          <TabPanel className="md:mx-44">
+            <div className="border rounded-lg shadow-2xl md:p-10">
               <h1 className="text-center underline font-agbalumo mb-10 text-2xl font-bold">
                 Work Experience
               </h1>
 
-              <div className="max-w-2xl mx-auto bg-white p-10">
+              <div className="max-w-2xl mx-auto bg-white p-5 md:p-10">
                 <form onSubmit={getWorkData}>
-                  <div className="grid gap-6 mb-6 lg:grid-cols-2">
+                  <div className="grid gap-6 mb-6 md:grid-cols-2">
                     <div className="col-span-2">
                       <label
                         htmlFor="worktitle"
@@ -333,7 +264,7 @@ const EditorTabs = () => {
             </div>
           </TabPanel>
           {/* tab panel fot Projects */}
-          <TabPanel>
+          <TabPanel className="md:mx-44">
             <div className="border rounded-lg shadow-2xl p-10">
               <h1 className="text-center underline font-agbalumo mb-10 text-2xl font-bold">
                 Projects
@@ -431,17 +362,234 @@ const EditorTabs = () => {
               </div>
             </div>
           </TabPanel>
-          <TabPanel>
-            <h1>Educations</h1>
+          {/* Educational panel */}
+          <TabPanel className="md:mx-44">
+            <div className="border rounded-lg shadow-2xl md:p-10">
+              <h1 className="text-center underline font-agbalumo mb-10 text-2xl font-bold">
+                Educations
+              </h1>
+
+              <div className="max-w-2xl mx-auto bg-white p-5 md:p-10">
+                <form onSubmit={getEducationData}>
+                  <div className="grid gap-6 mb-6 lg:grid-cols-2">
+                    <div className="col-span-2">
+                      <label
+                        htmlFor="lastGraduation"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        Institute Name
+                      </label>
+                      <input
+                        type="text"
+                        name="institute"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Institute Name"
+                        required
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <label
+                        htmlFor="title"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        Title
+                      </label>
+                      <input
+                        type="text"
+                        name="title"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Ex: Bsc In CSE"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="startdate"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        Start Date
+                      </label>
+                      <input
+                        type="date"
+                        name="startdate"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="enddate"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        End Date
+                      </label>
+                      <input
+                        type="date"
+                        name="enddate"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="github link"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Save
+                  </button>
+                </form>
+              </div>
+            </div>
           </TabPanel>
-          <TabPanel>
-            <h1>Achivements</h1>
+          {/* achievement tab panel  */}
+          <TabPanel className="md:mx-44">
+            <div className="border rounded-lg shadow-2xl md:p-10">
+              <h1 className="text-center underline font-agbalumo mb-10 text-2xl font-bold">
+                Achievemnets
+              </h1>
+
+              <div className="max-w-2xl mx-auto bg-white p-5 md:p-10">
+                <form onSubmit={getAchievementData}>
+                  <div className="grid gap-6 mb-6 lg:grid-cols-2">
+                    <div className="col-span-2">
+                      <label
+                        htmlFor="achievement1"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        Achievement1
+                      </label>
+                      <input
+                        type="text"
+                        name="ach1"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Enter your achievement"
+                        required
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <label
+                        htmlFor="achievement2"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        Achievement2
+                      </label>
+                      <input
+                        type="text"
+                        name="ach2"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Enter your achievement"
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <label
+                        htmlFor="achievement3"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        Achievement3
+                      </label>
+                      <input
+                        type="text"
+                        name="ach3"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Enter your achievement"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Save
+                  </button>
+                </form>
+              </div>
+            </div>
           </TabPanel>
-          <TabPanel>
-            <h1>Summery</h1>
+          {/* summery panel */}
+          <TabPanel className="md:mx-44">
+            <div className="border rounded-lg shadow-2xl md:p-10">
+              <h1 className="text-center underline font-agbalumo mb-10 text-2xl font-bold">
+                Summery
+              </h1>
+
+              <div className="max-w-2xl mx-auto bg-white p-5 md:p-10">
+                <form onSubmit={getSummeryData}>
+                  <div className="grid gap-6 mb-6 lg:grid-cols-2">
+                    <div className="col-span-2">
+                      <label
+                        htmlFor="summery"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        Summery
+                      </label>
+                      <textarea
+                        name="summery"
+                        className="w-full border border-black p-2 resize-none"
+                        cols="30"
+                        rows="10"
+                        placeholder="Write about yourself"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Save
+                  </button>
+                </form>
+              </div>
+            </div>
           </TabPanel>
-          <TabPanel>
-            <h1>Others</h1>
+          {/* other tab panel */}
+          <TabPanel className="md:mx-44">
+            <div className="border rounded-lg shadow-2xl md:p-10">
+              <h1 className="text-center underline font-agbalumo mb-10 text-2xl font-bold">
+                Other
+              </h1>
+
+              <div className="max-w-2xl mx-auto bg-white p-5 md:p-10">
+                <form onSubmit={getOtherData}>
+                  <div className="grid gap-6 mb-6 lg:grid-cols-2">
+                    <div className="col-span-2">
+                      <label
+                        htmlFor="other"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        Other
+                      </label>
+                      <textarea
+                        name="other"
+                        className="w-full border border-black p-2 resize-none"
+                        cols="30"
+                        rows="10"
+                        placeholder="Write about yourself"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Save
+                  </button>
+                </form>
+                <div className="text-center">
+                  <button
+                    onClick={handleSubmit}
+                    className="my-10 text-center bg-black text-white py-3 px-10 rounded-xl hover:scale-105 hover:bg-gray-300 hover:text-black hover:font-bold duration-300 ease-linear "
+                  >
+                    Genarate Resume
+                  </button>
+                </div>
+              </div>
+            </div>
           </TabPanel>
         </div>
       </Tabs>
